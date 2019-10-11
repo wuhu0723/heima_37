@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script id='aa' type='text/template'>
+        <ul>
+            <li>{{name}}</li>
+        </ul>
+    </script>
+    <script>
+
+        var obj = {
+            name:'jack'
+        }
+        var str = document.querySelector('#aa').innerHTML
+        console.log(str)
+        var reg = /{{(\w+)}}/
+        var res = reg.exec(str)
+        console.log(res)
+        var value = obj[res[1]] // jack
+        str = str.replace(res[0],value)
+        console.log(str)
+
+        // var reg = /^1[35678]\d{9}$/
+        // 020-12345678
+        // 07311234567
+        // <%= name %>
+        // var str = 'wuhu0723@126.com'
+        // var reg = /^(\w+)[@]((\w+)[.](\w{2,4}))$/
+        // var reg = /^0\d{2,3}[-]?[1-9]\d{6,7}$/
+        // 13645654765676645
+        // test:侧重是匹配，返回bool值，如果可以匹配成功则返回true,否则返回False
+        // var res = reg.test(str)
+        // exec:侧重的是匹配之后的字符串提取，返回一个数组，里面就包含着源字符串和提取字符串，如果不法匹配则返回null
+        // 方法：将你想提取的字符串的正则表达式部分用()包含
+        // var res = reg.exec(str)
+        // console.log(res)
+
+    </script>
+</body>
+
+</html>
