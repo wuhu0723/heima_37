@@ -9,3 +9,15 @@ export const login = (data) => {
     data
   })
 }
+
+// 获取当前登陆用户的个人信息
+export const getPersonalInfo = (id) => {
+  return axios({
+    // 将token以请求头的方式传递给服务器，服务器可以根据当前的token进行处理
+    // headers: {
+    //   // Authorization不能随意，得由后台来决定
+    //   'Authorization': localStorage.getItem('my_heimatoutiao_37')
+    // },
+    url: `/user/${id}`
+  })
+}

@@ -41,11 +41,19 @@ export default {
     myinput, mybutton
   },
   methods: {
+    // 登陆验证
     login () {
       console.log(this.userdata)
       login(this.userdata)
         .then(res => {
           console.log(res)
+          if (res.status === 200) {
+            // 将服务器返回的token数据存储到本地
+            localStorage.setItem('my_heimatoutiao_37', res.data.data.token)
+            // 将id存储到本地
+            localStorage.setItem('my_heimatoutiao_37_id', res.data.data.user.id)
+            this.$router.push({ name: 'Personal' })
+          }
         })
         .catch(err => {
           console.log(err)
