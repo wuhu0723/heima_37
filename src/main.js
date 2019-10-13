@@ -8,8 +8,8 @@ import router from '@/router/index.js'
 
 // // 如果use了，那么就会在Vue原型上挂载vant所有组件成员
 // Vue.use(Vant)
-import { Toast } from 'vant'
-Vue.use(Toast)
+// import { Toast } from 'vant'
+// Vue.use(Toast)
 
 Vue.config.productionTip = false
 
