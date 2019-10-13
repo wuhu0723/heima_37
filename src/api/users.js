@@ -9,6 +9,14 @@ export const login = (data) => {
     data
   })
 }
+// 注册
+export const register = (data) => {
+  return axios({
+    method: 'post',
+    url: '/register',
+    data
+  })
+}
 
 // 获取当前登陆用户的个人信息
 export const getPersonalInfo = (id) => {

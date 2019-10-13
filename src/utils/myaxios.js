@@ -24,8 +24,12 @@ axios.interceptors.request.use(function (config) {
 // 添加响应拦截器
 axios.interceptors.response.use(function (response) {
   // 对响应数据做点什么
-  if (response.data && response.data.message === '用户信息验证失败') {
+  // 1.处理所有状态码为401的错误信息
+  if (response.data.statusCode === 401) {
     Toast.fail(response.data.message)
+  }
+  // 单独再处理token无效的错误信息
+  if (response.data && response.data.message === '用户信息验证失败') {
     setTimeout(() => {
       // 通过浏览器的方式实现重定向
       window.location = '#/login'
