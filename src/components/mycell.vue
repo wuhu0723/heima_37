@@ -2,7 +2,7 @@
   <div class="cell" @click='handlerClick'>
     <span>{{title}}</span>
     <div class="info">
-      <span>{{desc}}</span>
+      <span>{{type==='password'?'******':desc}}</span>
       <span class="iconfont iconjiantou1"></span>
     </div>
   </div>
@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  props: ['title', 'desc'],
+  props: ['title', 'desc', 'type'],
   methods: {
     handlerClick (event) {
       this.$emit('click', event)
