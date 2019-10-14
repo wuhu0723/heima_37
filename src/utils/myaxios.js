@@ -1,6 +1,6 @@
 // 实现axios的封装
 import axios from 'axios'
-import { Toast } from 'vant'
+// import { Toast } from 'vant'
 
 // 配置axios的基准路径，将来这个路径会被自动的拼接到路由之前
 axios.defaults.baseURL = 'http://127.0.0.1:3000'
@@ -29,7 +29,8 @@ axios.interceptors.response.use(function (response) {
   // 1.处理所有状态码为401的错误信息
   let { message, statusCode } = response.data
   if (statusCode === 401) {
-    Toast.fail(message)
+    // Toast.fail(message)
+    this.$toast.fail(message)
   }
   // 单独再处理token无效的错误信息
   if (message === '用户信息验证失败') {

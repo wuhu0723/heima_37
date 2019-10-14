@@ -29,3 +29,12 @@ export const getPersonalInfo = (id) => {
     url: `/user/${id}`
   })
 }
+
+// 修改用户信息
+export const updataUserInfo = (id, data) => {
+  return axios({
+    method: 'post',
+    url: `/user_update/${id}`,
+    data
+  })
+}

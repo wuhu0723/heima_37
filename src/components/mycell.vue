@@ -1,5 +1,5 @@
 <template>
-  <div class="cell">
+  <div class="cell" @click='handlerClick'>
     <span>{{title}}</span>
     <div class="info">
       <span>{{desc}}</span>
@@ -10,7 +10,12 @@
 
 <script>
 export default {
-  props: ['title', 'desc']
+  props: ['title', 'desc'],
+  methods: {
+    handlerClick (event) {
+      this.$emit('click', event)
+    }
+  }
 }
 </script>
 

@@ -1,6 +1,6 @@
 <template>
   <div class="personal">
-    <router-link to="/edit_profile">
+    <router-link to="/editProfile">
       <div class="profile">
         <img :src="currentUser.head_img" alt />
         <div class="profile-center">
