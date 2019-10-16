@@ -38,3 +38,24 @@ export const updataUserInfo = (id, data) => {
     data
   })
 }
+
+// 获取我的关注
+export const getPersonalFocus = (id) => {
+  return axios({
+    url: `/user_follows`
+  })
+}
+
+// 取消我的关注
+export const cancelPersonalFocu = (id) => {
+  return axios({
+    url: `/user_unfollow/${id}`
+  })
+}
+
+// 获取我的跟帖
+export const getPersonalKeeps = (id) => {
+  return axios({
+    url: `/user_comments`
+  })
+}

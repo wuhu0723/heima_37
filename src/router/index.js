@@ -5,6 +5,9 @@ import Login from '@/pages/login.vue'
 import Personal from '@/pages/personal.vue'
 import Register from '@/pages/register.vue'
 import EditPersonal from '@/pages/editPersonal.vue'
+import Myfocus from '@/pages/myfocus.vue'
+import Mykeeps from '@/pages/mykeeps.vue'
+import Mycollections from '@/pages/mycollections.vue'
 Vue.use(VueRouter)
 
 const router = new VueRouter({
@@ -28,6 +31,21 @@ const router = new VueRouter({
       name: 'EditPersonal',
       path: '/editProfile',
       component: EditPersonal
+    },
+    {
+      name: 'Myfocus',
+      path: '/myfocus',
+      component: Myfocus
+    },
+    {
+      name: 'Mykeeps',
+      path: '/mykeeps',
+      component: Mykeeps
+    },
+    {
+      name: 'Mycollections',
+      path: '/mycollections',
+      component: Mycollections
     }
   ]
 })

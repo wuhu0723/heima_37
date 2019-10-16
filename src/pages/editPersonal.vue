@@ -6,8 +6,8 @@
     </myheader>
     <div class="myimg">
       <img :src="userdata.head_img" alt class="userImg" />
-      <!-- <van-uploader :after-read="afterRead" :before-read='beforeRead' /> -->
-      <van-uploader :after-read="afterRead" />
+      <van-uploader :after-read="afterRead" :before-read='beforeRead' />
+      <!-- <van-uploader :after-read="afterRead" /> -->
     </div>
     <mycell title="昵称" :desc="userdata.nickname" @click="nickshow=!nickshow"></mycell>
     <van-dialog v-model="nickshow" title="修改昵称" show-cancel-button @confirm='upNickName'>
@@ -87,6 +87,7 @@ export default {
         this.$toast.fail('请选择正确的图片格式')
         return false
       }
+      return true
     },
     // 2.图片上传，要实现两个操作：a.图片上传+页面数据刷新   b.数据库中数据的更新
     async afterRead (file) {
@@ -154,6 +155,10 @@ export default {
     // 6.修改密码
     upPassword () {
       // 获取用户输入的原密码，进行匹配，如果匹配成功则进行密码的修改，否则给出提示
+      if (this.$refs.password.$refs.input.value !== this.userdata.password) {
+        this.$toast.fail('原密码输入不正确')
+        return
+      }
       // 获取新密码
       let pwd = this.$refs.password2.$refs.input.value
       // 发起更新密码的请求
