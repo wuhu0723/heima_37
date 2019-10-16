@@ -8,10 +8,16 @@ import EditPersonal from '@/pages/editPersonal.vue'
 import Myfocus from '@/pages/myfocus.vue'
 import Mykeeps from '@/pages/mykeeps.vue'
 import Mycollections from '@/pages/mycollections.vue'
+import Index from '@/pages/index.vue'
 Vue.use(VueRouter)
 
 const router = new VueRouter({
   routes: [
+    {
+      name: 'Index',
+      path: '/',
+      component: Index
+    },
     {
       name: 'Login',
       path: '/login',
