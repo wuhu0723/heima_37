@@ -8,3 +8,10 @@ export const getArticalList = (params) => {
     params
   })
 }
+
+// 获取文章详情
+export const getArticalById = (id) => {
+  return axios({
+    url: `/post/${id}`
+  })
+}

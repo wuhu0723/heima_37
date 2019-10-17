@@ -9,6 +9,7 @@ import Myfocus from '@/pages/myfocus.vue'
 import Mykeeps from '@/pages/mykeeps.vue'
 import Mycollections from '@/pages/mycollections.vue'
 import Index from '@/pages/index.vue'
+import ArticalDetail from '@/pages/articalDetail.vue'
 Vue.use(VueRouter)
 
 const router = new VueRouter({
@@ -52,6 +53,11 @@ const router = new VueRouter({
       name: 'Mycollections',
       path: '/mycollections',
       component: Mycollections
+    },
+    {
+      name: 'ArticalDetail',
+      path: '/articalDetail/:id',
+      component: ArticalDetail
     }
   ]
 })

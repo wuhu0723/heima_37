@@ -1,5 +1,7 @@
 <template>
-  <div class="artical" v-if='post.cover && post.cover.length<=2 && post.type === 1'>
+<!-- 一张图片，左右结构 -->
+<router-link :to='"/articalDetail/"+post.id' v-if='post.cover && post.cover.length<=2 && post.type === 1'>
+  <div class="artical">
     <div class="left">
       <p class="content">{{post.title}}</p>
       <div class="info">
@@ -9,8 +11,9 @@
     </div>
     <img class="single" :src="post.cover[0].url" alt  />
   </div>
-
-  <div class="artical2"  v-else-if='post.cover&& post.cover.length>2 && post.type === 1'>
+</router-link>
+<!-- 三张图片：上中下结构 -->
+  <div class="artical2" @click='$router.push("/articalDetail/"+post.id)'  v-else-if='post.cover&& post.cover.length>2 && post.type === 1'>
     <div class="left">
       <p class="content">{{post.title}}</p>
     </div>
@@ -22,8 +25,8 @@
       <span>{{post.comment_length}}跟帖</span>
     </div>
   </div>
-
-  <div class="artical3"  v-else-if='post.type === 2'>
+<!-- 视频：上中下结构 -->
+  <div class="artical3"  @click='$router.push("/articalDetail/"+post.id)'  v-else-if='post.type === 2'>
     <div class="left">
       <p class="content">{{post.title}}</p>
     </div>

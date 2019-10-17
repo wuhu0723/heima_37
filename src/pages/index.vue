@@ -19,7 +19,7 @@
         <!-- 添加上拉加载组件 -->
         <van-list
           :immediate-check="false"
-          :offset="10"
+          :offset="100"
           v-model="item.loading"
           :finished="item.finished"
           finished-text="没有更多了"
