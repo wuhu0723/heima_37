@@ -1,37 +1,48 @@
 <template>
-<!-- 一张图片，左右结构 -->
-<router-link :to='"/articalDetail/"+post.id' v-if='post.cover && post.cover.length<=2 && post.type === 1'>
-  <div class="artical">
-    <div class="left">
-      <p class="content">{{post.title}}</p>
-      <div class="info">
-        <span>{{post.user.nickname}}</span>&nbsp;
-        <span>{{post.comment_length}}跟帖</span>
+  <!-- 一张图片，左右结构 -->
+  <router-link
+    :to='"/articalDetail/"+post.id'
+    v-if="post.cover && post.cover.length<=2 && post.type === 1"
+  >
+    <div class="artical">
+      <div class="left">
+        <p class="content">{{post.title}}</p>
+        <div class="info">
+          <span>{{post.user.nickname}}</span>&nbsp;
+          <span>{{post.comment_length}}跟帖</span>
+        </div>
       </div>
+      <img class="single" :src="post.cover[0].url" alt />
     </div>
-    <img class="single" :src="post.cover[0].url" alt  />
-  </div>
-</router-link>
-<!-- 三张图片：上中下结构 -->
-  <div class="artical2" @click='$router.push("/articalDetail/"+post.id)'  v-else-if='post.cover&& post.cover.length>2 && post.type === 1'>
+  </router-link>
+  <!-- 三张图片：上中下结构 -->
+  <div
+    class="artical2"
+    @click='$router.push("/articalDetail/"+post.id)'
+    v-else-if="post.cover&& post.cover.length>2 && post.type === 1"
+  >
     <div class="left">
       <p class="content">{{post.title}}</p>
     </div>
     <div class="imgs">
-      <img :src="item.url" alt="" v-for='item in post.cover' :key='item.id'>
+      <img :src="item.url" alt v-for="item in post.cover" :key="item.id" />
     </div>
     <div class="info">
       <span>{{post.user.nickname}}</span>&nbsp;
       <span>{{post.comment_length}}跟帖</span>
     </div>
   </div>
-<!-- 视频：上中下结构 -->
-  <div class="artical3"  @click='$router.push("/articalDetail/"+post.id)'  v-else-if='post.type === 2'>
+  <!-- 视频：上中下结构 -->
+  <div
+    class="artical3"
+    @click='$router.push("/articalDetail/"+post.id)'
+    v-else-if="post.type === 2"
+  >
     <div class="left">
       <p class="content">{{post.title}}</p>
     </div>
     <div class="video">
-      <img :src="post.cover[0].url" alt="">
+      <img :src="post.cover[0].url" alt />
       <i class="iconfont iconshipin"></i>
     </div>
     <div class="info">
@@ -49,24 +60,27 @@ export default {
 </script>
 
 <style lang='less' scoped>
+a{
+  color: #333;
+}
 .left {
-    flex: 1;
+  flex: 1;
+  overflow: hidden;
+  .content {
+    font-size: 14px;
+    padding: 0px 5px;
+    line-height: 26px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
     overflow: hidden;
-    .content {
-      font-size: 14px;
-      padding: 0px 5px;
-      line-height: 26px;
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 2;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
+    text-overflow: ellipsis;
   }
+}
 
 .info {
   font-size: 12px;
-  padding:5px;
+  padding: 5px;
   color: #999;
   > span:nth-of-type(1) {
     padding-right: 15px;
@@ -106,20 +120,20 @@ export default {
       height: 100%;
     }
     i {
-        position: absolute;
-        font-size: 46/360*100vw;
-        color:#fff;
-        border:1px solid #ccc;
-        background-color: rgba(0,0,0,0.2);
-        box-shadow: 0px 0px 10px #fff;
-        border-radius: 50%;
-        left: 50%;
-        top:50%;
-        transform: translate(-50%,-50%);
+      position: absolute;
+      font-size: 46/360 * 100vw;
+      color: #fff;
+      border: 1px solid #ccc;
+      background-color: rgba(0, 0, 0, 0.2);
+      box-shadow: 0px 0px 10px #fff;
+      border-radius: 50%;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
     }
   }
 }
-.artical2{
+.artical2 {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -136,7 +150,7 @@ export default {
     }
   }
 }
-.artical3{
+.artical3 {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -153,12 +167,12 @@ export default {
     i {
       position: absolute;
       font-size: 60px;
-      color:#fff;
-      left:50%;
-      top:50%;
-      transform: translate(-50%,-50%);
+      color: #fff;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
       border-radius: 50%;
-      border:1px solid #fff;
+      border: 1px solid #fff;
       box-shadow: 0px 0px 5px #fff;
     }
   }

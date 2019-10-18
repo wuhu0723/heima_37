@@ -26,6 +26,9 @@
         <mycell title='设置'></mycell>
       </router-link>
     </div>
+    <div class="exitbtn">
+      <van-button type="info" class="btn" @click='exitApp'>退出</van-button>
+    </div>
   </div>
 </template>
 
@@ -48,6 +51,13 @@ export default {
   },
   filters: {
     timeformat
+  },
+  methods: {
+    exitApp () {
+      localStorage.removeItem('my_heimatoutiao_37')
+      localStorage.removeItem('my_heimatoutiao_37_id')
+      this.$router.push('/')
+    }
   },
   mounted () {
     // 获取当前登陆用户的个人信息
@@ -76,6 +86,15 @@ export default {
 </script>
 
 <style lang='less' scoped>
+.exitbtn{
+  width: 100%;
+  text-align: center;
+  padding: 40px 10px;
+  box-sizing: border-box;
+  .btn{
+    width: 100%;
+  }
+}
 .personal {
   width: 100vw;
   height: 100vh;

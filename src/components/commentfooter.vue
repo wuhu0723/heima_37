@@ -6,7 +6,7 @@
         <i class="iconfont iconpinglun-"></i>
         <em>100</em>
       </span>
-      <i class="iconfont iconshoucang"></i>
+      <i class="iconfont iconshoucang" :class='{active:post.has_star}' @click='handlerstar'></i>
       <i class="iconfont iconfenxiang"></i>
     </div>
     <div class="inputcomment" v-show='isFocus'>
@@ -19,13 +19,27 @@
 </template>
 
 <script>
+import { starArtical } from '@/api/articals.js'
 export default {
+  props: ['post'],
   data () {
     return {
       isFocus: false
     }
   },
   methods: {
+    // 点赞
+    async handlerstar () {
+      let res = await starArtical(this.post.id)
+      console.log(res)
+      if (res.data.message === '收藏成功') {
+        this.post.has_star = true
+        this.$toast.success('收藏成功')
+      } else {
+        this.post.has_star = false
+        this.$toast.success('取消收藏成功')
+      }
+    },
     //   获取焦点时触发
     handlerFocus () {
       this.isFocus = !this.isFocus
@@ -93,6 +107,9 @@ export default {
   }
   i {
     font-size: 20px;
+    &.active{
+      color:red;
+    }
   }
   > span {
     flex: 1;

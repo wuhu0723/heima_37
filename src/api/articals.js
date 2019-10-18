@@ -15,3 +15,17 @@ export const getArticalById = (id) => {
     url: `/post/${id}`
   })
 }
+
+// 文章点赞
+export const likeArtical = (id) => {
+  return axios({
+    url: `/post_like/${id}`
+  })
+}
+
+// 文章收藏
+export const starArtical = (id) => {
+  return axios({
+    url: `/post_star/${id}`
+  })
+}

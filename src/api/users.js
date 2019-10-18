@@ -46,6 +46,13 @@ export const getPersonalFocus = (id) => {
   })
 }
 
+// 关注用户
+export const setPersonalFocu = (id) => {
+  return axios({
+    url: `/user_follows/${id}`
+  })
+}
+
 // 取消我的关注
 export const cancelPersonalFocu = (id) => {
   return axios({
@@ -57,5 +64,12 @@ export const cancelPersonalFocu = (id) => {
 export const getPersonalKeeps = (id) => {
   return axios({
     url: `/user_comments`
+  })
+}
+
+// 获取我的收藏
+export const getPersonalCollections = (id) => {
+  return axios({
+    url: `/user_star`
   })
 }
