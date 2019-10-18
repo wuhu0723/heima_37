@@ -10,6 +10,7 @@ import Mykeeps from '@/pages/mykeeps.vue'
 import Mycollections from '@/pages/mycollections.vue'
 import Index from '@/pages/index.vue'
 import ArticalDetail from '@/pages/articalDetail.vue'
+import Comments from '@/pages/comments.vue'
 Vue.use(VueRouter)
 
 const router = new VueRouter({
@@ -58,6 +59,11 @@ const router = new VueRouter({
       name: 'ArticalDetail',
       path: '/articalDetail/:id',
       component: ArticalDetail
+    },
+    {
+      name: 'Comments',
+      path: '/comments/:id',
+      component: Comments
     }
   ]
 })

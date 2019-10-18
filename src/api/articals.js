@@ -29,3 +29,10 @@ export const starArtical = (id) => {
     url: `/post_star/${id}`
   })
 }
+
+// 获取文章评论列表
+export const getPostComments = (id) => {
+  return axios({
+    url: `/post_comment/${id}`
+  })
+}

@@ -5,7 +5,10 @@
         <van-icon name="arrow-left back" @click="$router.back()" />
         <span class="iconfont iconnew new"></span>
       </div>
-      <span :class="{active:artical.has_follow}" @click='followUser'>{{artical.has_follow?'已关注':'关注'}}</span>
+      <span
+        :class="{active:artical.has_follow}"
+        @click="followUser"
+      >{{artical.has_follow?'已关注':'关注'}}</span>
     </div>
     <!-- 文章详情 -->
     <div class="detail">
@@ -14,10 +17,14 @@
         <span>{{artical.user.nickname}}</span> &nbsp;&nbsp;
         <span>2019-9-9</span>
       </div>
-      <div id="content" class="articalcontent" v-html="artical.content"></div>
+      <div id="content" class="articalcontent" v-html="artical.content" v-if="artical.type === 1"></div>
+      <div class="video" v-if='artical.type === 2'>
+        <video src="https://video.pearvideo.com/mp4/adshort/20191018/cont-1613484-14496802_adpkg-ad_hd.mp4" controls :poster='artical.cover[0].url'></video>
+      </div>
       <div class="opt">
-        <span :class="{like:true,active:artical.has_like}" @click='likethisartical'>
-          <van-icon name="good-job-o" />{{artical.like_length}}
+        <span :class="{like:true,active:artical.has_like}" @click="likethisartical">
+          <van-icon name="good-job-o" />
+          {{artical.like_length}}
         </span>
         <span class="chat">
           <van-icon name="chat" class="w" />微信
@@ -42,7 +49,7 @@
     </div>
     <div style="height:50px;width:100%"></div>
     <!-- 添加评论区域 -->
-    <commentfooter :post='artical'></commentfooter>
+    <commentfooter :post="artical"></commentfooter>
   </div>
 </template>
 
@@ -80,16 +87,15 @@ export default {
     followUser () {
       // 1.修改当前的关注状态
       this.artical.has_follow = !this.artical.has_follow
-      if (this.artical.has_follow) { // 经过这一次单击之后，切换到已关注状态，那么我们同时需要修改数据库的数据存储--实现数据更新
-        setPersonalFocu(this.artical.user.id)
-          .then(res => {
-            this.$toast.success(res.data.message)
-          })
+      if (this.artical.has_follow) {
+        // 经过这一次单击之后，切换到已关注状态，那么我们同时需要修改数据库的数据存储--实现数据更新
+        setPersonalFocu(this.artical.user.id).then(res => {
+          this.$toast.success(res.data.message)
+        })
       } else {
-        cancelPersonalFocu(this.artical.user.id)
-          .then(res => {
-            this.$toast.success(res.data.message)
-          })
+        cancelPersonalFocu(this.artical.user.id).then(res => {
+          this.$toast.success(res.data.message)
+        })
       }
     }
   },
@@ -108,6 +114,12 @@ export default {
 
 <style lang='less' scoped>
 .articaldetail_37 {
+  .video {
+    width: 100%;
+    video {
+      width: 100%;
+    }
+  }
   // 如果想要修改服务器返回页面结构中的元素的样式，则不要添加scoped标识，否则无法修改元素的样式
   .header {
     padding: 0px 10px;
@@ -137,11 +149,11 @@ export default {
       text-align: center;
       border-radius: 15px;
       font-size: 13px;
-      border:1px solid #ccc;
-      &.active{
+      border: 1px solid #ccc;
+      &.active {
         background-color: #f00;
         color: #fff;
-        border:1px solid #f00;
+        border: 1px solid #f00;
       }
     }
   }
@@ -185,8 +197,8 @@ export default {
       border-radius: 15px;
     }
     .like {
-      &.active{
-        color:red;
+      &.active {
+        color: red;
       }
     }
     .w {

@@ -2,9 +2,9 @@
   <div class="comment">
     <div class="addcomment" v-show='!isFocus'>
       <input type="text" placeholder="写跟帖" @focus="handlerFocus" />
-      <span class="comment">
+      <span class="comment" @click='$router.push("/comments/"+post.id)'>
         <i class="iconfont iconpinglun-"></i>
-        <em>100</em>
+        <em>{{post.comment_length}}</em>
       </span>
       <i class="iconfont iconshoucang" :class='{active:post.has_star}' @click='handlerstar'></i>
       <i class="iconfont iconfenxiang"></i>
