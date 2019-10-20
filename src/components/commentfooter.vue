@@ -49,8 +49,18 @@ export default {
       let data = {
         content: this.$refs.commtext.value
       }
+      console.log(this.replayobj)
+      // 判断当前是否是回复评论：标准就是replayobj是否不为null
+      if (this.replayobj) {
+        data.parent_id = this.replayobj.id
+      }
       let res = await sendComment(id, data)
       console.log(res)
+      if (res.data.message === '评论发布成功') {
+        this.$toast.success('评论发布成功')
+        // 刷新
+        this.$emit('refresh')
+      }
     },
     // 取消评论
     cancelreplay () {

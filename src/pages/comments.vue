@@ -14,12 +14,27 @@
           <span @click='wirtecomment(item)'>回复</span>
         </div>
         <!-- 下面这个组件的调用,是为了生成parent中的评论数据结构,一定要记得进行判断,判断是否有parent -->
-        <commentItem v-if='item.parent' :comment='item.parent'></commentItem>
+        <commentItem
+        v-if='item.parent'
+        :comment='item.parent'
+        @wirtecomment='wirtecomment'
+        ></commentItem>
         <div class="text">{{item.content}}</div>
       </div>
     </div>
     <div style='width:100%;height:50px'></div>
-    <commentfooter :post='artical' :replayobj='replayobj' @resetValue='resetValue'></commentfooter>
+    <!--
+      :post='artical'为子组件中的props成员赋值：这个值是当前文章数据
+      :replayobj='replayobj' 为子组件中的props成员赋值，这个值是当前评论数据对象
+      @resetValue='resetValue' 重置子组件中的评论数据
+      @refresh='init' 实现页面刷新
+     -->
+    <commentfooter
+      :post='artical'
+      :replayobj='replayobj'
+      @resetValue='resetValue'
+      @refresh='init'
+    ></commentfooter>
   </div>
 </template>
 
@@ -49,33 +64,29 @@ export default {
       // console.log(this.artical)
       console.log(item)
       this.replayobj = item
+    },
+    // 数据初始化
+    init () {
+      let id = this.$route.params.id
+      getPostComments(id).then(res => {
+        console.log(res)
+        if (res.status === 200) {
+          this.commentsList = res.data.data
+          // 根据id获取文章数据
+          getArticalById(id)
+            .then(res => {
+              console.log(res)
+              if (res.status === 200) {
+                this.artical = res.data.data
+                window.scrollTo(0, 0)
+              }
+            })
+        }
+      })
     }
   },
   mounted () {
-    let id = this.$route.params.id
-    getPostComments(id).then(res => {
-      console.log(res)
-      if (res.status === 200) {
-        // res.data.data[6].parent.parent.parent = {
-        //   content: '看看有没有',
-        //   id: 22,
-        //   parent: null,
-        //   user: {
-        //     nickname: 'jack'
-        //   }
-        // }
-        this.commentsList = res.data.data
-
-        // 根据id获取文章数据
-        getArticalById(id)
-          .then(res => {
-            console.log(res)
-            if (res.status === 200) {
-              this.artical = res.data.data
-            }
-          })
-      }
-    })
+    this.init()
   }
 }
 </script>
