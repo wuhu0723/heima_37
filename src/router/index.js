@@ -11,6 +11,7 @@ import Mycollections from '@/pages/mycollections.vue'
 import Index from '@/pages/index.vue'
 import ArticalDetail from '@/pages/articalDetail.vue'
 import Comments from '@/pages/comments.vue'
+import Search from '@/pages/search.vue'
 Vue.use(VueRouter)
 
 const router = new VueRouter({
@@ -64,6 +65,11 @@ const router = new VueRouter({
       name: 'Comments',
       path: '/comments/:id',
       component: Comments
+    },
+    {
+      name: 'Search',
+      path: '/search',
+      component: Search
     }
   ]
 })

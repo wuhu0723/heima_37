@@ -10,7 +10,7 @@
       <i class="iconfont iconfenxiang"></i>
     </div>
     <div class="inputcomment" v-show='isFocus'>
-        <textarea  ref='commtext' rows="5" autofocus></textarea>
+        <textarea :placeholder='placeholder'  ref='commtext' rows="5" autofocus></textarea>
         <div>
             <span @click='sendcomment'>发送</span>
             <span @click='cancelreplay'>取消</span>
@@ -26,7 +26,8 @@ export default {
   data () {
     return {
       isFocus: false,
-      obj: {}
+      obj: {},
+      placeholder: 'aa'
     }
   },
   // mounted () {
@@ -39,6 +40,10 @@ export default {
       // 只有当用户单击了回复，并且有评论对象的时候，才需要弹出输入框
       if (this.replayobj) {
         this.isFocus = true
+        setTimeout(() => {
+          this.$refs.commtext.focus()
+        }, 0)
+        this.placeholder = '@' + this.replayobj.user.nickname
       }
     }
   },
@@ -58,6 +63,7 @@ export default {
       console.log(res)
       if (res.data.message === '评论发布成功') {
         this.$toast.success('评论发布成功')
+        this.$refs.commtext.value = ''
         // 刷新
         this.$emit('refresh')
       }
@@ -65,6 +71,7 @@ export default {
     // 取消评论
     cancelreplay () {
       this.isFocus = false
+      this.$refs.commtext.value = ''
       // 不能在子组件中直接修改props中定义的成员的值，因为这个值只能父组件来修改---子传父
       // 我们只能让子组件告诉父组件要重置这个值
       this.$emit('resetValue')
@@ -85,6 +92,9 @@ export default {
     //   获取焦点时触发
     handlerFocus () {
       this.isFocus = !this.isFocus
+      setTimeout(() => {
+        this.$refs.commtext.focus()
+      }, 0)
     }
   }
 }

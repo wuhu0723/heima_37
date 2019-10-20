@@ -3,7 +3,7 @@
     <!--头部 -->
     <div class="header">
       <div class="logo iconfont iconnew logo"></div>
-      <div class="search">
+      <div class="search" @click='$router.push("/search")'>
         <van-icon name="search" />&nbsp;
         <span>搜索新闻</span>
       </div>
