@@ -10,24 +10,56 @@
       <i class="iconfont iconfenxiang"></i>
     </div>
     <div class="inputcomment" v-show='isFocus'>
-        <textarea  ref='commtext' rows="5" @blur='isFocus = false' autofocus></textarea>
+        <textarea  ref='commtext' rows="5" autofocus></textarea>
         <div>
-            <span>发送</span>
+            <span @click='sendcomment'>发送</span>
+            <span @click='cancelreplay'>取消</span>
         </div>
     </div>
   </div>
 </template>
 
 <script>
-import { starArtical } from '@/api/articals.js'
+import { starArtical, sendComment } from '@/api/articals.js'
 export default {
-  props: ['post'],
+  props: ['post', 'replayobj'],
   data () {
     return {
-      isFocus: false
+      isFocus: false,
+      obj: {}
+    }
+  },
+  // mounted () {
+  //   this.replayobj = null
+  // },
+  // 监听post值的变化
+  watch: {
+    replayobj () {
+      console.log(123)
+      // 只有当用户单击了回复，并且有评论对象的时候，才需要弹出输入框
+      if (this.replayobj) {
+        this.isFocus = true
+      }
     }
   },
   methods: {
+    // 发表评论
+    async sendcomment () {
+      let id = this.post.id
+      let data = {
+        content: this.$refs.commtext.value
+      }
+      let res = await sendComment(id, data)
+      console.log(res)
+    },
+    // 取消评论
+    cancelreplay () {
+      this.isFocus = false
+      // 不能在子组件中直接修改props中定义的成员的值，因为这个值只能父组件来修改---子传父
+      // 我们只能让子组件告诉父组件要重置这个值
+      this.$emit('resetValue')
+      // this.replayobj = null
+    },
     // 点赞
     async handlerstar () {
       let res = await starArtical(this.post.id)

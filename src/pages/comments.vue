@@ -11,7 +11,7 @@
             <p>火星网友</p>
             <span>2小时前</span>
           </div>
-          <span>回复</span>
+          <span @click='wirtecomment(item)'>回复</span>
         </div>
         <!-- 下面这个组件的调用,是为了生成parent中的评论数据结构,一定要记得进行判断,判断是否有parent -->
         <commentItem v-if='item.parent' :comment='item.parent'></commentItem>
@@ -19,7 +19,7 @@
       </div>
     </div>
     <div style='width:100%;height:50px'></div>
-    <commentfooter :post='artical'></commentfooter>
+    <commentfooter :post='artical' :replayobj='replayobj' @resetValue='resetValue'></commentfooter>
   </div>
 </template>
 
@@ -32,11 +32,24 @@ export default {
   data () {
     return {
       commentsList: [],
-      artical: {}
+      artical: {},
+      replayobj: null // 当前的评论数据对象
     }
   },
   components: {
     myheader, commentItem, commentfooter
+  },
+  methods: {
+    // 重置 当前的评论对象
+    resetValue () {
+      this.replayobj = null
+    },
+    // 写评论
+    wirtecomment (item) {
+      // console.log(this.artical)
+      console.log(item)
+      this.replayobj = item
+    }
   },
   mounted () {
     let id = this.$route.params.id

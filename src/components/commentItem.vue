@@ -9,6 +9,7 @@
     </div>
 
     <!-- 通过名称可以调用组件,调用的方式与使用标签无异 -->
+    <!-- v-if="comment.parent":这就是递归退出的条件 -->
     <mycomment v-if="comment.parent" :comment="comment.parent"></mycomment>
   </div>
 </template>
